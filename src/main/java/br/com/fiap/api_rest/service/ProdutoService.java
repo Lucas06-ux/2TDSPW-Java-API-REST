@@ -19,6 +19,7 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
     public Produto read(UUID id){
+
         Optional<Produto>  produto = produtoRepository.findById(id);
         return produto.orElse(null);
     }
@@ -30,6 +31,7 @@ public class ProdutoService {
     public Produto update(Produto produto){
         return produtoRepository.save(produto);
     }
+
     public void delete(UUID id){
         produtoRepository.deleteById(id);
     }
