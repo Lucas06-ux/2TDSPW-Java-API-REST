@@ -3,6 +3,7 @@ package br.com.fiap.api_rest.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,18 +20,12 @@ public class Cliente {
     private LocalDate dataNascimento;
     @Column(name = "TELEFONE")
     private String telefone;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_ENDERECO")
+    private Endereco endereco;
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
 
-    public Cliente() {
-    }
-
-    public Cliente(String cpf, String nome, String email,
-                   LocalDate dataNascimento, String telefone) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-    }
 
     public String getCpf() {
         return cpf;

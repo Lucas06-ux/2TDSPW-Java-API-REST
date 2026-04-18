@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertFalse;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,24 +16,21 @@ public class Pedido {
     @Column(name = "ID")
     private UUID Id;
     @Column(name= "STATUS")
-    private String status;
+    private StatusPedido status;
     @Column(name= "DATA")
-    private LocalDate data;
+    private LocalDateTime data;
     @Column(name= "ID_PRODUTO")
     private Produto produto;
     @Column(name= "VALOR")
-    private double valor;
-
-    public Pedido() {
-    }
-
-    public Pedido(UUID id, String status, LocalDate data, Produto produto, double valor) {
-        Id = id;
-        this.status = status;
-        this.data = data;
-        this.produto = produto;
-        this.valor = valor;
-    }
+    private Double valor;
+    @ManyToOne
+    @JoinColumn(name = "ID_CLIENTE")
+    private Cliente cliente;
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_PEDIDO",
+            joinColumns = @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "ID_PEDIDO", referencedColumnName = "id"))
+    private List<Produto> produtos;
 
     public UUID getId() {
         return Id;
@@ -41,19 +40,19 @@ public class Pedido {
         Id = id;
     }
 
-    public String getStatus() {
+    public StatusPedido getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusPedido status) {
         this.status = status;
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 
@@ -65,11 +64,11 @@ public class Pedido {
         this.produto = produto;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 }

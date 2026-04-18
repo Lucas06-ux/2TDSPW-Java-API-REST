@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CancellationException;
 
 @Entity
 @Table(name ="TB_PRODUTO")
@@ -19,15 +21,11 @@ public class Produto {
     private BigDecimal preco;
     @Column(name = "DATA_VALIDADE")
     private LocalDate expiracao;
+    private Categoria categoria;
+    private int estoque;
+    @ManyToMany(mappedBy = "produtos")
+    private List<Pedido> pedidos;
 
-    public Produto() {
-    }
-
-    public Produto(String nome, BigDecimal preco, LocalDate expiracao) {
-        this.nome = nome;
-        this.preco = preco;
-        this.expiracao = expiracao;
-    }
 
     public UUID getId() {
         return id;
@@ -59,5 +57,29 @@ public class Produto {
 
     public void setExpiracao(LocalDate expiracao) {
         this.expiracao = expiracao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

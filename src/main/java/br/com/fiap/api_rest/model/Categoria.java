@@ -6,4 +6,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "TB_CATEGORIA")
 public enum Categoria {
+    BEBIDAS,
+    ESSENCIA,
+    NARGUILE,
+    VAPE,
+    ACESSORIO,
+    TABACO,
+    CIGARRO,
 }

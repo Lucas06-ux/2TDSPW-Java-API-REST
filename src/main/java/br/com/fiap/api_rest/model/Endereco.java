@@ -14,7 +14,7 @@ public class Endereco {
     @Column(name = "LOGRADOURO")
     private String logradouro;
     @Column(name = "NUMERO")
-    private int numero;
+    private String numero;
     @Column(name = "COMPLEMENTO")
     private String complemento;
     @Column(name = "CIDADE")
@@ -25,22 +25,8 @@ public class Endereco {
     private String estado;
     @Column(name = "CEP")
     private String cep;
-
-    public Endereco() {
-    }
-
-    public Endereco(UUID id, String logradouro, int numero,
-                    String complemento, String cidade, String bairro,
-                    String estado, String cep) {
-        Id = id;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.estado = estado;
-        this.cep = cep;
-    }
+    @OneToOne(mappedBy = "endereco")
+    private Cliente cliente;
 
     public UUID getId() {
         return Id;
@@ -58,11 +44,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -104,5 +90,13 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
