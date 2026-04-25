@@ -19,8 +19,6 @@ public class Pedido {
     private StatusPedido status;
     @Column(name= "DATA")
     private LocalDateTime data;
-    @Column(name= "ID_PRODUTO")
-    private Produto produto;
     @Column(name= "VALOR")
     private Double valor;
     @ManyToOne
@@ -56,13 +54,6 @@ public class Pedido {
         this.data = data;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
 
     public Double getValor() {
         return valor;
