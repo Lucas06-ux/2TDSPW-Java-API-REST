@@ -21,6 +21,7 @@ public class Produto {
     private BigDecimal preco;
     @Column(name = "DATA_VALIDADE")
     private LocalDate expiracao;
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private int estoque;
     @ManyToMany(mappedBy = "produtos")

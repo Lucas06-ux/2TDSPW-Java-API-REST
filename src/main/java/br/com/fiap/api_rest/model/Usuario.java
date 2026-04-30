@@ -22,6 +22,15 @@ public class Usuario implements UserDetails {
     private String senha;
     private UserRole role;
 
+    public Usuario(String login, String senha, UserRole role) {
+        this.login = login;
+        this.senha = senha;
+        this.role = role;
+    }
+    public Usuario(){
+
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(UserRole.ADMIN.equals(this.role)){
